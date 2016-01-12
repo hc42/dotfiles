@@ -1,5 +1,6 @@
 # Specify your defaults in this environment variable
 export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/usr/local/Caskroom"
+export VISUAL="vim"
 fpath=(/usr/local/share/zsh-completions $fpath)
 
 # ==== no atuocorrect Aliases
@@ -8,6 +9,7 @@ alias mv='nocorrect mv'
 alias grunt='nocorrect grunt'
 alias ssh='nocorrect ssh'
 alias git='nocorrect git'
+alias vim='nocorrect vim'
 
 # ==== Global Aliases
 alias -g ...='../..'
