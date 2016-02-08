@@ -119,10 +119,10 @@ endfunction
 
 " Dragvisuals plugin
 runtime plugin/dragvisuals.vim
-vmap	<expr>	h	 DVB_Drag('left')
-vmap	<expr>	l  DVB_Drag('right')
-vmap	<expr>	j	 DVB_Drag('down')
-vmap	<expr>	k	 DVB_Drag('up')
+vmap	<expr>	H	 DVB_Drag('left')
+vmap	<expr>	L  DVB_Drag('right')
+vmap	<expr>	J	 DVB_Drag('down')
+vmap	<expr>	K	 DVB_Drag('up')
 vmap	<expr>	D	 DVB_Duplicate()
 
 " Enable synatx for js libs

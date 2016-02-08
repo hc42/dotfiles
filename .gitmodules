@@ -10,3 +10,6 @@
 [submodule ".vim/bundle/javascript-libraries-syntax"]
 	path = .vim/bundle/javascript-libraries-syntax
 	url = https://github.com/othree/javascript-libraries-syntax.vim.git
+[submodule ".vim/bundle/tabular"]
+	path = .vim/bundle/tabular
+	url = git://github.com/godlygeek/tabular.git
