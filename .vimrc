@@ -129,6 +129,8 @@ vmap	<expr>	D	 DVB_Duplicate()
 autocmd BufReadPre *.js let b:javascript_lib_use_jquery = 1
 autocmd BufReadPre *.js let b:javascript_lib_use_angularjs = 1
 
+runtime plugin/sort.vim
+
 " include folder config
 set exrc
 set secure
