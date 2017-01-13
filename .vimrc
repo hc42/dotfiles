@@ -51,7 +51,7 @@ function TrimWhiteSpace()
 	%s/\s*$//
 	''
 :endfunction
-autocmd BufWritePre *.{c,h,cpp,ino,java,php,js} call TrimWhiteSpace()
+autocmd BufWritePre *.{c,h,cpp,ino,java,php,js,html} call TrimWhiteSpace()
 
 " ardunio files with cpp code
 au BufNewFile,BufRead *.ino set filetype=cpp
@@ -63,6 +63,10 @@ au BufNewFile,BufRead *.json set ft=javascript
 filetype plugin on
 au FileType php set omnifunc=phpcomplete#CompletePHP
 au FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+
+au FileType php set makeprg=php\ -l\ %
+au FileType php set errorformat=%m\ in\ %f\ on\ line\ %l,%-GErrors\ parsing\ %f,%-G
+au FileType php nnoremap <buffer> <silent> <f2> :update<bar>sil! make<bar>cwindow<cr>:redraw!<cr>
 
 " dont wrap text
 set nowrap
