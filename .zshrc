@@ -1,5 +1,6 @@
 # Specify your defaults in this environment variable
 export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/usr/local/Caskroom"
+export GOPATH=~/go
 #export EDITOR="vim"
 fpath=(/usr/local/share/zsh-completions $fpath)
 
@@ -96,3 +97,10 @@ export LSCOLORS="Gxfxcxdxbxegedabagacad"
 
 # Find the option for using colors in ls, depending on the version: Linux or BSD
 ls --color -d . &>/dev/null 2>&1 && alias ls='ls --color=tty' || alias ls='ls -G'
+
+# ssh host completion by known_hosts file
+if [ -e $HOME/.ssh/known_hosts ] ; then
+  local hosts
+  hosts=(${${${(f)"$(<$HOME/.ssh/known_hosts)"}%%\ *}%%,*})
+  zstyle ':completion:*:hosts' hosts $hosts
+fi
