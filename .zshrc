@@ -17,8 +17,7 @@ alias -g ....='../../..'
 alias -g .....='../../../..'
 
 # ==== Alias Commands
-alias ll="ls -al"
-alias lh="ls -alh"
+alias ll="ls -alh"
 
 # ==== Commands By File Extension
 alias -s php=vim
