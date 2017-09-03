@@ -106,3 +106,5 @@ if [ -e $HOME/.ssh/config ] ; then
   hosts=($hosts ${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Host *}#Host }:#*[*?]*})
 fi
 zstyle ':completion:*:hosts' hosts $hosts
+
+if [ -f ~/.zshrc.local ] ; then ; source ~/.zshrc.local; fi
