@@ -1,7 +1,11 @@
+### Dotfiles
+
+## Setup
+
 # clone repository
 git clone ...
 git submodule init
-git submodule update
+git submodule update --depth 1
 
 # setup vim
 mkdir ~/.vimbackup
@@ -14,6 +18,7 @@ ln -s .vim ~/.vim
 rm ~/.zshrc
 ln -s .zshrc ~/.zshrc
 mkdir -p ~/.zsh/cache
+ln -s .zsh/lib ~/.zsh/lib
 
 # setup ssh config
 rm ~/.ssh/config

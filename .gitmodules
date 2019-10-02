@@ -13,3 +13,6 @@
 [submodule ".vim/bundle/tabular"]
 	path = .vim/bundle/tabular
 	url = git://github.com/godlygeek/tabular.git
+[submodule ".zsh/lib/zsh-autosuggestions"]
+	path = .zsh/lib/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions
