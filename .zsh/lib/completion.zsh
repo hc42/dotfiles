@@ -44,7 +44,12 @@ if [ -d /usr/local/share/zsh/site-functions ] ; then ; fpath=(/usr/local/share/z
 # path for linux
 if [ -d /usr/share/zsh/vendor-completions ] ; then ; fpath=(/usr/share/zsh/vendor-completions $fpath) ; fi
 
-# The following lines were added by compinstall
+# compinit - check dump file only once a day
 zstyle :compinstall filename '.zsh/lib/completion.zsh'
-autoload -Uz compinit && compinit
-# End of lines added by compinstall
+autoload -Uz compinit
+if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]; then
+  compinit
+  touch ~/.zcompdump
+else
+  compinit -C
+fi
