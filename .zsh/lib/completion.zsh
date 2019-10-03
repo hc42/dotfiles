@@ -22,12 +22,15 @@ zstyle ':completion:*' matcher-list '' \
 # ssh host completion by known_hosts file
 local hosts
 if [ -e $HOME/.ssh/known_hosts ] ; then
-  hosts=(${${${(f)"$(<$HOME/.ssh/known_hosts)"}%%\ *}%%,*})
+  if [ ! -f /etc/ssh/ssh_config ] || [ "$(grep HashKnownHosts /etc/ssh/ssh_config |grep yes)" = "" ] ; then
+    hosts=(${${${(f)"$(<$HOME/.ssh/known_hosts)"}%%\ *}%%,*})
+  fi
 fi
 if [ -e $HOME/.ssh/config ] ; then
   hosts=($hosts ${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Host *}#Host }:#*[*?]*})
 fi
 zstyle ':completion:*:hosts' hosts $hosts
+unset hosts
 
 # ==== zsh-autosuggestions plugin
 source ~/.zsh/lib/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -45,11 +48,18 @@ if [ -d /usr/local/share/zsh/site-functions ] ; then ; fpath=(/usr/local/share/z
 if [ -d /usr/share/zsh/vendor-completions ] ; then ; fpath=(/usr/share/zsh/vendor-completions $fpath) ; fi
 
 # compinit - check dump file only once a day
-zstyle :compinstall filename '.zsh/lib/completion.zsh'
 autoload -Uz compinit
-if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]; then
+zstyle :compinstall filename '.zsh/lib/completion.zsh'
+# linux compatibility case
+if [ "$(uname 2> /dev/null)" = "Linux" ]; then
+  local compdump_days=$(test ! -f ~/.zcompdump || date +'%j' -d @$(stat -c '%Y' ~/.zcompdump))
+else
+  local compdump_days=$(test ! -f ~/.zcompdump || stat -f '%Sm' -t '%j' ~/.zcompdump)
+fi
+if [ $(date +'%j') != $compdump_days ]; then
   compinit
   touch ~/.zcompdump
 else
   compinit -C
 fi
+unset compdump_days
