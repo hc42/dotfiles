@@ -27,8 +27,12 @@ bindkey "^[[1~" beginning-of-line
 bindkey "^[[4~" end-of-line
 
 # Make alt + left or right move word forward or backwars
+# MacOS
 bindkey "^[f" forward-word
 bindkey "^[b" backward-word
+# Linux
+bindkey "^[[1;3C" forward-word
+bindkey "^[[1;3D" backward-word
 
 # ==== Command line interactive edit
 autoload -Uz edit-command-line
