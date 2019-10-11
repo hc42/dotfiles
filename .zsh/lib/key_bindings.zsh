@@ -7,9 +7,15 @@ autoload -U history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
 # history seach backward on up key based upon what has already been entered at the prompt
+# macos
 bindkey "^[[A" history-beginning-search-backward-end
+# linux
+bindkey "$terminfo[kcuu1]" history-beginning-search-backward-end
 # history seach forward on down key based upon what has already been entered at the prompt
+# macos
 bindkey "^[[B" history-beginning-search-forward-end
+# linux
+bindkey "$terminfo[kcud1]" history-beginning-search-forward-end
 
 # ctrl+r to search histroy backwards (export VISUAL disables this default)
 bindkey '^r' history-incremental-search-backward
