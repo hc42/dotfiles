@@ -46,20 +46,13 @@ if [ -d /usr/local/share/zsh-completions ] ; then ; fpath=(/usr/local/share/zsh-
 if [ -d /usr/local/share/zsh/site-functions ] ; then ; fpath=(/usr/local/share/zsh/site-functions $fpath) ; fi
 # path for linux
 if [ -d /usr/share/zsh/vendor-completions ] ; then ; fpath=(/usr/share/zsh/vendor-completions $fpath) ; fi
+# local scripts
+if [ -d $HOME/.zsh-completions ] ; then ; fpath=($HOME/.zsh-completions $fpath) ; fi
 
 # compinit - check dump file only once a day
 autoload -Uz compinit
 zstyle :compinstall filename '.zsh/lib/completion.zsh'
-# linux compatibility case
-if [ "$(uname 2> /dev/null)" = "Linux" ]; then
-  local compdump_days=$(test ! -f ~/.zcompdump || date +'%j' -d @$(stat -c '%Y' ~/.zcompdump))
-else
-  local compdump_days=$(test ! -f ~/.zcompdump || stat -f '%Sm' -t '%j' ~/.zcompdump)
-fi
-if [ $(date +'%j') != $compdump_days ]; then
-  compinit
-  touch ~/.zcompdump
-else
-  compinit -C
-fi
-unset compdump_days
+for dump in ~/.zcompdump.local(N.mh+24); do
+  compinit -d ~/.zcompdump.local
+done
+compinit -C -d ~/.zcompdump.local
